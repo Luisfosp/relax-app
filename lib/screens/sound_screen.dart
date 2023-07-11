@@ -34,7 +34,7 @@ class _PlayRouteState extends State<PlayRoute> {
 
   playPause(sound) {
     if (initialPlay) {
-      //cache.play('audio/$sound.mp3');
+      player.play(AssetSource('audio/$sound.mp3'));
       playing = true;
       initialPlay = false;
     }
@@ -146,15 +146,15 @@ class _BackgroundState extends State<Background> {
     timer = Timer(const Duration(seconds: 6), swap);
     return Stack(
       children: [
-        Image.asset(img + widget.sound + '_1.jpg', fit: BoxFit.fill),
+        Image.asset('$img${widget.sound}_1.jpg', fit: BoxFit.fill),
         AnimatedOpacity(
-            child: Image.asset(
-              img + widget.sound + '_2.jpg',
-              fit: BoxFit.fill,
-            ),
             duration: const Duration(seconds: 2),
-            opacity: _visible ? 1.0 : 0.0)
-      ],
-    );
-  }
+            opacity: _visible ? 1.0 : 0.0,
+            child: Image.asset(
+              '$img${widget.sound}_2.jpg',
+              fit: BoxFit.fill,
+            ))
+    ],
+);
+}
 }
